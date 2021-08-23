@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/buttonFragment">
+
+    <fragment
+        android:id="@+id/buttonFragment"
+        android:name="com.example.cloudinteractivedarrenhsieh.ButtonFragment"
+        android:label="fragment_button"
+        tools:layout="@layout/fragment_button" >
+        <action
+            android:id="@+id/action_buttonFragment_to_gridFragment"
+            app:destination="@id/gridFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gridFragment"
+        android:name="com.example.cloudinteractivedarrenhsieh.GridFragment"
+        android:label="fragment_grid"
+        tools:layout="@layout/fragment_grid" >
+        <action
+            android:id="@+id/action_gridFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.example.cloudinteractivedarrenhsieh.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item" >
+        <action
+            android:id="@+id/action_itemFragment_to_gridFragment"
+            app:destination="@id/gridFragment" />
+    </fragment>
+</navigation>
