@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.volley.toolbox.ImageRequest
 import com.example.cloudinteractivedarrenhsieh.data.Album
 import com.example.cloudinteractivedarrenhsieh.network.AlbumApi
+import com.example.cloudinteractivedarrenhsieh.volleySingleton.HeaderRequest
 import com.example.cloudinteractivedarrenhsieh.volleySingleton.VolleySingleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,21 +36,22 @@ class ShareViewModel : ViewModel() {
     }
 
     fun setImage(position: Int, image: ImageView,context: Context){
-        val imageRequest = ImageRequest(
-            _albumInfo.value?.get(position)?.thumbnailUrl+".jpg",
-            { bitmap ->
-                image.setImageBitmap(bitmap)
-            },
-            0,
-            0,
-            ImageView.ScaleType.CENTER_CROP, // image scale type
-            Bitmap.Config.ARGB_8888, // decode config)
-            {   // error listener
-            }
-        )
+
+        val headerRequest =
+            HeaderRequest(
+                _albumInfo.value?.get(position)?.thumbnailUrl!!,
+                { bitmap ->
+                    image.setImageBitmap(bitmap)
+                },
+                0,
+                0,
+                ImageView.ScaleType.CENTER_CROP, // image scale type
+                Bitmap.Config.ARGB_8888, // decode config)
+                {   // error listener
+                })
 
         VolleySingleton.getInstance(context)
-            .addToRequestQueue(imageRequest)
+            .addToRequestQueue(headerRequest)
     }
 
 }

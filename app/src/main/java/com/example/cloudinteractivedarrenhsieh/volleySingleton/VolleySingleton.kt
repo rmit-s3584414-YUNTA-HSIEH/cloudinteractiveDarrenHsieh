@@ -25,8 +25,8 @@ class VolleySingleton constructor(context: Context) {
     //get application's memory
     val availMemInBytes = am.memoryClass*1024*1024
 
-    val imageLoader: ImageLoader by lazy {
-        ImageLoader(requestQueue,
+    val imageLoader: HeaderImageLoader by lazy {
+        HeaderImageLoader(requestQueue,
             object : ImageLoader.ImageCache {
                 private val cache = LruCache<String, Bitmap>( availMemInBytes/8)
                 override fun getBitmap(url: String): Bitmap? {

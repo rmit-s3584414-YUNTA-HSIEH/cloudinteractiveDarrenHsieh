@@ -40,7 +40,7 @@ RecyclerView.Adapter<AlbumAdapter.ListViewHolder>(){
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         //load image by using volley imageloader
-        holder.image.setImageUrl(items[position].thumbnailUrl+".jpg", VolleySingleton.getInstance(context).imageLoader)
+        holder.image.setImageUrl(items[position].thumbnailUrl, VolleySingleton.getInstance(context).imageLoader)
 
         holder.idText.text = items[position].id.toString()
         holder.titleText.text = items[position].title
