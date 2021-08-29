@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.cloudinteractivedarrenhsieh.loader.ImageLoader
 
 
 class ItemFragment : Fragment() {
@@ -55,6 +56,11 @@ class ItemFragment : Fragment() {
 
 
 
+    }
+
+    override fun onDestroy() {
+        ImageLoader.cancelScope()
+        super.onDestroy()
     }
 
 }

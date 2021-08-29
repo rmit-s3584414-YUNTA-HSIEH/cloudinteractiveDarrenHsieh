@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cloudinteractivedarrenhsieh.adapter.AlbumAdapter
+import com.example.cloudinteractivedarrenhsieh.loader.ImageLoader
 
 
 class GridFragment : Fragment() {
@@ -43,6 +44,9 @@ class GridFragment : Fragment() {
 
         }
 
-
+    override fun onDestroy() {
+        ImageLoader.cancelScope()
+        super.onDestroy()
+    }
 
 }

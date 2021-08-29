@@ -6,20 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.toolbox.NetworkImageView
 import com.example.cloudinteractivedarrenhsieh.R
 import com.example.cloudinteractivedarrenhsieh.data.Album
-import com.example.cloudinteractivedarrenhsieh.volleySingleton.VolleySingleton
+import com.example.cloudinteractivedarrenhsieh.loader.ImageLoader
+
 
 class AlbumAdapter(private val items: List<Album>,private val context: Context):
 RecyclerView.Adapter<AlbumAdapter.ListViewHolder>(){
 
     class ListViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var image: NetworkImageView = view.findViewById(R.id.imageView)
+        var image: ImageView = view.findViewById(R.id.imageView)
         var idText: TextView = view.findViewById(R.id.recyclerIdText)
         var titleText: TextView = view.findViewById(R.id.recyclerTitleText)
     }
@@ -39,9 +40,7 @@ RecyclerView.Adapter<AlbumAdapter.ListViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        //load image by using volley imageloader
-        holder.image.setImageUrl(items[position].thumbnailUrl, VolleySingleton.getInstance(context).imageLoader)
-
+        ImageLoader.showImage(items[position].thumbnailUrl,holder.image,context)
         holder.idText.text = items[position].id.toString()
         holder.titleText.text = items[position].title
 
@@ -50,7 +49,6 @@ RecyclerView.Adapter<AlbumAdapter.ListViewHolder>(){
             val bundle: Bundle = bundleOf(Pair("position", position))
             it.findNavController().navigate(R.id.action_gridFragment_to_itemFragment,bundle)
         }
-
     }
 
     override fun getItemCount(): Int {
